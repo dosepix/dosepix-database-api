@@ -38,8 +38,13 @@ export class UsersController {
 
     @Post()
     async create(@Body('user') userData: UserDto) {
+        console.log(userData);
         await this.usersService.create(userData).catch((error) => {
-            throw new BadRequestException("User already existing");
+            if(error.code === 'ER_NO_DEFAULT_FOR_FIELD') {
+                throw new BadRequestException("Fields are missing or false");
+            } else {
+                throw new BadRequestException("User already existing");
+            }
         });
     }
 
