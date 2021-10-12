@@ -4,6 +4,7 @@ import { DeleteResult, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { UserDto } from './dto/user.dto';
 import QueryDto from './dto/query.dto';
+import { Role } from '../guard/role.enum';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,12 @@ export class UsersService {
 
     async create(userData: UserDto): Promise<User> {
         const newUser = this.usersRepository.create(userData);
+        return this.usersRepository.save(newUser);
+    }
+
+    async createAdmin(userData: UserDto): Promise<User> {
+        const newUser = this.usersRepository.create(userData);
+        newUser.role = Role.Admin;
         return this.usersRepository.save(newUser);
     }
 

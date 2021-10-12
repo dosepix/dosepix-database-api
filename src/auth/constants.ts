@@ -4,3 +4,5 @@
 export const jwtConstants = {
     secret: process.env.SECRETKEY,
 };
+
+export const adminToken = process.env.ADMIN_TOKEN;

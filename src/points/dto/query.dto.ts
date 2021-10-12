@@ -2,8 +2,10 @@ import { Allow } from 'class-validator';
 
 export class QueryDto {
     @Allow()
-    userId: number;
+    measurementId: number;
     @Allow()
-    dosimeterId: number;
+    time: number;
+    @Allow()
+    dose: number;
 }
 export default QueryDto;

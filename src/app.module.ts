@@ -13,6 +13,8 @@ import { MeasurementsModule } from './measurements/measurements.module';
 import { User } from './users/user.entity';
 import { Dosimeter } from './dosimeters/dosimeter.entity';
 import { Measurement } from './measurements/measurement.entity';
+import { PointsModule } from './points/points.module';
+import { Point } from './points/point.entity';
 
 // https://docs.nestjs.com/techniques/database
 @Module({
@@ -25,13 +27,14 @@ import { Measurement } from './measurements/measurement.entity';
       username: 'test',
       password: 'test',
       database: 'test',
-      entities: [User, Dosimeter, Measurement],
+      entities: [User, Dosimeter, Measurement, Point],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     DosimetersModule,
-    MeasurementsModule],
+    MeasurementsModule,
+    PointsModule],
   controllers: [AppController],
   providers: [],
 })

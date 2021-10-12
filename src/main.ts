@@ -8,8 +8,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({
     disableErrorMessages: true,
+    // Ensures that no additional properties are provided
+    // especially useful to prevent users for giving themselves a role
+    whitelist: true,
   }));
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableCors();
 
   await app.listen(8080);
 }

@@ -11,18 +11,22 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class MeasurementsController {
     constructor(private readonly measurementsService: MeasurementsService) {}
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get()
     async find( @Query() queryDto: QueryDto, @Request() req ) {
         if (queryDto.userId === undefined) {
             throw new BadRequestException("No user provided");
         }
+        /*
+        // TODO: Add authorization
         if (queryDto.userId != req.user.id) {
             throw new BadRequestException("Unauthorized user");
         }
+        */
 
         if (Object.keys(queryDto).length != 0) {
             var measurementQuery = await this.measurementsService.query(queryDto);
+            console.log(measurementQuery);
             if (measurementQuery != undefined) {
                 return measurementQuery;
             }
